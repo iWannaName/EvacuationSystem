@@ -91,7 +91,7 @@ public class edge implements Comparable{
 			step[] s = rts[i].getSteps();
 			for(int j=1;j<s.length;j++) {
 				edge [] es = s[i].getTrajectory();
-				for(int i1 =0;i1<es.length;i1++) {
+				for(int i1 =0;i1<es.length;i1++) {		
 					ts.add(es[i1]);
 				}
 			}

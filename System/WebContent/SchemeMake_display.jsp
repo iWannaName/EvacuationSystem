@@ -284,16 +284,16 @@
                         <ul aria-expanded="false">
                             <li><a href="SchemeMake.jsp">演练任务制定</a></li>
                             <li><a href="taskView.jsp">演练任务查询</a></li>
+                            <li><a href="SchemeMake_display.jsp">历史任务信息</a></li>
                         </ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">疏散演练</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="#">人群疏散方案制定</a></li>
+                       <ul aria-expanded="false">
+                            <li><a href="${pageContext.request.contextPath}/SchemeMake_display.jsp">人群疏散方案制定</a></li>
                             <li><a href="#">人群疏散方案查看</a></li>
-                            <li><a href="${pageContext.request.contextPath}/email-compose.html">Compose</a></li>
                         </ul>
                     </li>
                     <li>
@@ -347,7 +347,7 @@
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">演练任务管理</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">历史任务显示</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">演练任务显示</a></li>
                     </ol>
                 </div>
             </div>
@@ -357,7 +357,7 @@
              <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">历史任务信息</h4>
+                                <h4 class="card-title">演练任务信息</h4>
                                 <div class="table-responsive">
                                     <table class="table header-border table-hover verticle-middle">
                                         <thead>

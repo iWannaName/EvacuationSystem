@@ -1,64 +1,28 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/ TR/html4/loose.dtd">
+<!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
-<%@ page language = "java" contentType="text/html;charset=UTF-8" pageEncoding="utf-8" import="java.util.ArrayList"%>
+<%@ page language = "java" contentType="text/html;charset=UTF-8" pageEncoding="utf-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>账户管理</title>
+    <title>保护方案</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/images/favicon.png">
     <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+    <style type="text/css">
+	#allmap {width: 100%;height: 800px;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=18KFfk5BGw6gHtfuvV8pSg08wgc65xFc"></script>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 
 </head>
+
 <body>
-	  <%
-	String username = null;
-	Cookie[] cookies = request.getCookies();
-	for (Cookie cookie : cookies) {
-		if (cookie.getName().equals("username")) {
-			username = cookie.getValue();
-		}
-	}
-	if(username==null){
-		out.println("<script>alert('没有权限 ')</script>");
-		return;
-	}
-	%>
-		<%!
-			String power;
-			String status;
-			String subtitle;
-		%>
-		<%
-			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("power")) {
-					power = cookie.getValue();
-				}
-				if (cookie.getName().equals("status")) {
-					status = cookie.getValue();
-				}
-			}
-		%>
- <!--*******************
-        删除账户的提示信息显示 start
-    ********************-->
-		
- <%
-     Object message = session.getAttribute("message");
-    if(message!=null && !"".equals(message)){
- 
-  %>
-      <script type="text/javascript">
-          alert("<%=message%>");
-      </script>
-  <%} %>
-   <!--*******************
-        删除账户的提示信息显示 end
-    ********************-->
-    <!--*******************
+  <!--*******************
         Preloader start
     ********************-->
     <div id="preloader">
@@ -230,7 +194,7 @@
                                 </div>
                             </div>
                         </li>
-                         <li class="icons dropdown d-none d-md-flex">
+                        <li class="icons dropdown d-none d-md-flex">
                             <a href="javascript:void(0)" class="log-user"  data-toggle="dropdown">
                                 <span>中文</span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
                             </a>
@@ -284,7 +248,7 @@
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">首页</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="${pageContext.request.contextPath}/welcome.jsp">Home 1</a></li>
+                            <li><a href="${pageContext.request.contextPath}/index.jsp">Home 1</a></li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
@@ -295,7 +259,6 @@
                         <ul aria-expanded="false">
                             <li><a href="SchemeMake.jsp">演练任务制定</a></li>
                             <li><a href="taskView.jsp">演练任务查询</a></li>
-                            <li><a href="SchemeMake_display.jsp">历史任务信息</a></li>
                         </ul>
                     </li>
                     <li>
@@ -333,18 +296,8 @@
                             <i class="icon-note menu-icon"></i><span class="nav-text">系统管理</span>
                         </a>
                         <ul aria-expanded="false">
-                         <%
-                            	if((Integer.parseInt(power)&4)==4){
-                            		subtitle="可修改账户信息";
-                            		out.print("<li><a class='active-menu' href='AccountManageServlet'>账户管理</a></li>");
-                            	}
-                            %>
-                            <%
-                            	if((Integer.parseInt(power)&2)==2 && status.equals("1")){
-                            		subtitle="可修改角色信息";
-                            		out.print("<li><a href='RoleManageServlet'>角色管理</a></li>");
-                            	}
-                            %>
+                         <li><a href="${pageContext.request.contextPath}/AccountManage.jsp">账户管理</a></li>
+                            <li><a href="${pageContext.request.contextPath}/RoleManage.jsp">人群保护方案查看</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -362,91 +315,63 @@
             <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">系统管理</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">账户管理</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">保护演练</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">保护演练制定</a></li>
                     </ol>
                 </div>
             </div>
             <!-- row -->
 
             <div class="container-fluid">
-            <div class="col-lg-12">
+            <div class="row">
+                    <div class="col">
                         <div class="card">
-                        <div class="card-header">
-<!--                             <ul class="nav nav-pills card-header-pills"> -->
-<!--                                 <li class="nav-item"><a class="nav-link active" href="#">修改账户信息</a> -->
-<!--                                 </li> -->
-<!--                                 <li class="nav-item"><a class="nav-link" href="#">删除账户</a> -->
-<!--                                  </li> -->
-<!--                                  <li class="nav-item"><a class="nav-link" href="#">新增账户</a> -->
-<!--                                  </li> -->
-<!--                             </ul> -->
+                        
+                            <div class="card-body"  id="allmap">
+                              
+                            </div>
                         </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
                             <div class="card-body">
-                                <div class="card-title">
-                                    <h4>账户信息</h4>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>警号</th>
-                                                <th>姓名</th>
-                                                <th>身份证号</th>
-                                                <th>职务</th>
-                                                 <th>工作单位</th>  
-                                                 <th>入队日期</th>
-                                                <th>手机号码</th>
-                                                <th>邮箱</th>
-                                                <th>操作</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                         <%
-	                                    request.setCharacterEncoding("utf-8");
-	                                    response.setContentType("text/html;charset=utf-8");	
-										HttpSession sess = request.getSession();
-	                                    ArrayList<String[]> ret = new ArrayList<String[]>();
-										ret = (ArrayList<String[]>)sess.getAttribute("ret");
-										if (ret.size()!=0) {
-											for(int i=0;i<ret.size();i++)
-											{
-													out.print("<tr>");
-													for(int j=1;j<9;j++){
-														out.print("<th>");
-														out.print(ret.get(i)[j]);
-														out.print("</th>");
-													}
-													String id=ret.get(i)[1];
-													%>
-													<td><span>
-													<a href="${pageContext.request.contextPath}/FindUserServlet?userid=<%=id %>" data-toggle="tooltip" data-placement="top" title="修改"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
-													 <a href="javascript:void(0);" onclick="remove('<%=id%>')" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-close color-danger"></i></a>
-													</span></td>
-													<% 
-													out.print("</tr>");
-											}
-										}
-										session.invalidate();
-									%>
-                                       
-                                        </tbody>
-                                    </table>
+                                <h4 class="card-title">保护方案</h4>
+                                <div class="button-group">
+                                    <div class="btn-group-vertical" id="driving_way">
+                                    <div class="input-group mb-3">
+                                     <div class="input-group-prepend">
+                                        <button class="btn btn-primary"  id="0">路径1</button>
+                                        </div>
+                                       <input type="text" class="form-control" value="派遣警察5人">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                     <div class="input-group-prepend">
+                                        <button class="btn btn-primary"  id="1">路径2</button>
+                                        </div>
+                                        <input type="text" class="form-control" value="派遣警察3人">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                     <div class="input-group-prepend">
+                                        <button class="btn btn-primary"  id="2">路径3</button>
+                                        </div>
+                                         <input type="text" class="form-control" value="派遣警察2人">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- /# card -->
-                        
-                        
                     </div>
-                    <!-- #/ column -->
+                </div>
+
             </div>
             <!-- #/ container -->
         </div>
         <!--**********************************
             Content body end
-        ***********************************-->      
-         <!--**********************************
+        ***********************************-->
+        
+        
+        <!--**********************************
             Footer start
         ***********************************-->
         <div class="footer">
@@ -470,16 +395,31 @@
     <script src="${pageContext.request.contextPath}/js/settings.js"></script>
     <script src="${pageContext.request.contextPath}/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/js/styleSwitcher.js"></script>
-     <script type="text/javascript">
-    function remove(userid){
-    	if(confirm("您确定删除吗？")){
-    	location.href="${pageContext.request.contextPath}/AccountDeleteServlet?userid="+userid;
-    	}else{
-    	location.href="${pageContext.request.contextPath}/AccountManageServlet";
-    	}
-    	}
-    </script>
 
 </body>
 
 </html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	var start = "大连大学";
+	var end = "大连火车站";
+	map.centerAndZoom(new BMap.Point(121.62,38.92), 11);
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+	//三种驾车策略：最少时间，最短距离，避开高速
+	let routePolicy = [BMAP_DRIVING_POLICY_LEAST_TIME,BMAP_DRIVING_POLICY_LEAST_DISTANCE,BMAP_DRIVING_POLICY_AVOID_HIGHWAYS];
+	window.onload = function(){
+		let arr = document.getElementsByTagName('button');
+		for(let i = 0;i<arr.length;i++){
+			
+		arr[i].onclick = function(){
+			map.clearOverlays(); 
+			search(start,end,routePolicy[i]); 
+			function search(start,end,route){ 
+				let driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true,enableDragging : true },policy: route});
+				driving.search(start,end);
+			}
+		}
+		}
+		}
+</script>

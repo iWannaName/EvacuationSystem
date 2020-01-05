@@ -308,9 +308,8 @@
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">疏散演练</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">人群疏散方案制定</a></li>
+                            <li><a href="${pageContext.request.contextPath}/SchemeMake_display.jsp">人群疏散方案制定</a></li>
                             <li><a href="#">人群疏散方案查看</a></li>
-                            <li><a href="${pageContext.request.contextPath}/email-compose.html">Compose</a></li>
                         </ul>
                     </li>
                     <li>
@@ -318,7 +317,7 @@
                             <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">保护演练</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">人群保护方案制定</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ProtectionMake.jsp">人群保护方案制定</a></li>
                             <li><a href="#">人群保护方案查看</a></li>
                         </ul>
                     </li>

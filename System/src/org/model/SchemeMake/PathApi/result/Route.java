@@ -6,17 +6,18 @@ import org.model.BaiduMap;
 import org.model.settings;
 import org.model.SchemeMake.Units.*;
 import org.model.SchemeMake.Units.*;
+//百度 API中获取的路径信息，routes参数是返回的方案集
 public class Route {
 	private vertex src;
 	private vertex dst;
 	private String tag;
 	private Condition[] traffic_condition;
-	private int distance = 0;
-	private int duration = 0;
+	private int distance = 0; //方案距离
+	private int duration = 0;//线路耗时
 	private int taxi_fee = 0;
-	private int toll = 0;
-	private int toll_distance = 0;
-	private step[] steps;
+	private int toll = 0;       //此路线道路收费
+	private int toll_distance = 0; //收费路段距离
+	private step[] steps;//路线分段
 
 	public Route(String json) {
 		if (settings.DEBUG_MODE) {

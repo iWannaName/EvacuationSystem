@@ -1,11 +1,14 @@
 ﻿<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+<%@ page language = "java" contentType="text/html;charset=UTF-8" pageEncoding="utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>可用边展示</title>
+    <title>疏散路径</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/images/favicon.png">
     <!-- Custom Stylesheet -->
@@ -14,7 +17,10 @@
 </head>
 <%@page import="java.io.PrintWriter"%>
 <body>
-            <%
+ <!--*******************
+        权限控制
+    ********************-->
+ <%
 	String username = null;
 	Cookie[] cookies = request.getCookies();
 	for (Cookie cookie : cookies) {
@@ -42,7 +48,8 @@
 				}
 			}
 		%>
-		        <%
+		
+		 <%
                  String project_id = null;
                  String Event_id=null;
                  project_id=request.getParameter("Project_id");
@@ -55,8 +62,12 @@
                  	out1.close();
                  }
                  %>
-                 
-          <!--*******************
+ <!--*******************
+       权限控制结束
+    ********************-->
+
+
+    <!--*******************
         Preloader start
     ********************-->
     <div id="preloader">
@@ -228,7 +239,7 @@
                                 </div>
                             </div>
                         </li>
-                         <li class="icons dropdown d-none d-md-flex">
+                        <li class="icons dropdown d-none d-md-flex">
                             <a href="javascript:void(0)" class="log-user"  data-toggle="dropdown">
                                 <span>中文</span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
                             </a>
@@ -282,7 +293,7 @@
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">首页</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="${pageContext.request.contextPath}/welcome.jsp">Home 1</a></li>
+                            <li><a href="${pageContext.request.contextPath}/index.jsp">Home 1</a></li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
@@ -350,7 +361,8 @@
         <!--**********************************
             Sidebar end
         ***********************************-->
-         <!--**********************************
+
+        <!--**********************************
             Content body start
         ***********************************-->
         <div class="content-body">
@@ -359,21 +371,14 @@
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">疏散演练</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">可用边展示</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">疏散路径</a></li>
                     </ol>
                 </div>
             </div>
             <!-- row -->
 
             <div class="container-fluid">
-             <div class="row">
-                 <div class="col-md-12">
-<!--                  <h2 class="page-header"> -->
-
-<%--                     <%if(project_id!=null)out.print("可用边展示");else out.print("方案路径");%> --%>
-
-<!--                 </h2> -->
-		<%String src = "map.jsp?";
+            <%String src = "map.jsp?";
 		if(project_id!=null){
 			src+="Project_id=";
 			src+=project_id;
@@ -384,21 +389,90 @@
 			
 		}
 		%>
-        <iframe src="<%=src%>" width="100%" height="850" frameborder="0" scrolling="no"></iframe>
-                 </div>
-        </div>
+		<div class="row">
+  <div class="col-md-7">
+  <iframe src="<%=src%>" width="100%" height="850" frameborder="0" scrolling="no"></iframe>
+  </div>
+  <div class="col-md-5">
+  <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">疏散方案</h4>
+                                <!-- Nav tabs -->
+                                <div class="default-tab">
+                                    <ul class="nav nav-tabs mb-3" role="tablist">
+                                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#first">路径1</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#second">路径2</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#third">路径3</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#forth">路径4</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="first" role="tabpanel">
+                                        <h5>疏散人数</h5>
+                                        <p>121人</p>
+                                         <p></p>
+                                             <form>
+                                            <h5>疏散路径</h5>
+                                            <select class="form-control" id="sel1">
+                                                <option>途径振兴路，东联路，全城39.8公里</option>
+                                                <option>1.进入学府大街，行驶2.2公里</option>
+                                                <option>2.进入学府南街，行驶530米</option>
+                                                <option>3.进入松翠路，行驶390米</option>
+                                                <option>4.进入松仁街，行驶260米</option>
+                                                <option>5.进入铁山中路，行驶300米</option>
+                                                <option>6.进入铁山西路，行驶1.3米</option>
+                                                <option>7.进入东北六街，行驶320米</option>
+                                                <option>8.进入淮河西路，行驶4.4公里</option>
+                                                <option>9.进入赫山西路，行驶1.3公里</option>
+                                                <option>10.进入振兴路路，行驶9.8公里</option>
+                                                
+                                            </select>
+                                        </form>
+                                       
+                                        
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="second">
+                                            <div class="p-t-15">
+                                                <h4>This is profile title</h4>
+                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.</p>
+                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.</p>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="third">
+                                            <div class="p-t-15">
+                                                <h4>This is contact title</h4>
+                                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
+                                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="forth">
+                                            <div class="p-t-15">
+                                                <h4>This is message title</h4>
+                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.</p>
+                                                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+  </div>
+</div>
         
-                 <!-- /. ROW  -->
-
+             
             </div>
             <!-- #/ container -->
         </div>
         <!--**********************************
             Content body end
         ***********************************-->
-       
-                
-	 <!--**********************************
+        
+        
+        <!--**********************************
             Footer start
         ***********************************-->
         <div class="footer">

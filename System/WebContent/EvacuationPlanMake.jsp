@@ -1,20 +1,26 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/ TR/html4/loose.dtd">
+<!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
-<%@ page language = "java" contentType="text/html;charset=UTF-8" pageEncoding="utf-8" import="java.util.ArrayList"%>
+<%@ page language = "java" contentType="text/html;charset=UTF-8" pageEncoding="utf-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>账户管理</title>
+    <title>疏散路径</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/images/favicon.png">
     <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 
 </head>
+
 <body>
-	  <%
+ <!--*******************
+        权限控制
+    ********************-->
+ <%
 	String username = null;
 	Cookie[] cookies = request.getCookies();
 	for (Cookie cookie : cookies) {
@@ -43,21 +49,10 @@
 			}
 		%>
  <!--*******************
-        删除账户的提示信息显示 start
+       权限控制结束
     ********************-->
-		
- <%
-     Object message = session.getAttribute("message");
-    if(message!=null && !"".equals(message)){
- 
-  %>
-      <script type="text/javascript">
-          alert("<%=message%>");
-      </script>
-  <%} %>
-   <!--*******************
-        删除账户的提示信息显示 end
-    ********************-->
+
+
     <!--*******************
         Preloader start
     ********************-->
@@ -230,7 +225,7 @@
                                 </div>
                             </div>
                         </li>
-                         <li class="icons dropdown d-none d-md-flex">
+                        <li class="icons dropdown d-none d-md-flex">
                             <a href="javascript:void(0)" class="log-user"  data-toggle="dropdown">
                                 <span>中文</span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
                             </a>
@@ -284,7 +279,7 @@
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">首页</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="${pageContext.request.contextPath}/welcome.jsp">Home 1</a></li>
+                            <li><a href="${pageContext.request.contextPath}/index.jsp">Home 1</a></li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
@@ -295,7 +290,6 @@
                         <ul aria-expanded="false">
                             <li><a href="SchemeMake.jsp">演练任务制定</a></li>
                             <li><a href="taskView.jsp">演练任务查询</a></li>
-                            <li><a href="SchemeMake_display.jsp">历史任务信息</a></li>
                         </ul>
                     </li>
                     <li>
@@ -303,7 +297,7 @@
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">疏散演练</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">人群疏散方案制定</a></li>
+                            <li><a href="${pageContext.request.contextPath}/EvacuationPlanMake.jsp">人群疏散方案制定</a></li>
                             <li><a href="#">人群疏散方案查看</a></li>
                             <li><a href="${pageContext.request.contextPath}/email-compose.html">Compose</a></li>
                         </ul>
@@ -313,7 +307,7 @@
                             <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">保护演练</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">人群保护方案制定</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ProtectionMake.jsp">人群保护方案制定</a></li>
                             <li><a href="#">人群保护方案查看</a></li>
                         </ul>
                     </li>
@@ -361,92 +355,34 @@
 
             <div class="row page-titles mx-0">
                 <div class="col p-md-0">
+<%--                 <a class="btn btn-primary" href="${pageContext.request.contextPath}/displayer.jsp" role="button">获取疏散路径</a> --%>
+<!--                 <a class="btn btn-primary" href="#" role="button">文字显示</a> -->
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">系统管理</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">账户管理</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">疏散方案制定</a></li>
+                     
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">最优疏散路径显示</a></li>
                     </ol>
+                    
+                    
+                    
+                     
                 </div>
             </div>
             <!-- row -->
 
             <div class="container-fluid">
-            <div class="col-lg-12">
-                        <div class="card">
-                        <div class="card-header">
-<!--                             <ul class="nav nav-pills card-header-pills"> -->
-<!--                                 <li class="nav-item"><a class="nav-link active" href="#">修改账户信息</a> -->
-<!--                                 </li> -->
-<!--                                 <li class="nav-item"><a class="nav-link" href="#">删除账户</a> -->
-<!--                                  </li> -->
-<!--                                  <li class="nav-item"><a class="nav-link" href="#">新增账户</a> -->
-<!--                                  </li> -->
-<!--                             </ul> -->
-                        </div>
-                            <div class="card-body">
-                                <div class="card-title">
-                                    <h4>账户信息</h4>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>警号</th>
-                                                <th>姓名</th>
-                                                <th>身份证号</th>
-                                                <th>职务</th>
-                                                 <th>工作单位</th>  
-                                                 <th>入队日期</th>
-                                                <th>手机号码</th>
-                                                <th>邮箱</th>
-                                                <th>操作</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                         <%
-	                                    request.setCharacterEncoding("utf-8");
-	                                    response.setContentType("text/html;charset=utf-8");	
-										HttpSession sess = request.getSession();
-	                                    ArrayList<String[]> ret = new ArrayList<String[]>();
-										ret = (ArrayList<String[]>)sess.getAttribute("ret");
-										if (ret.size()!=0) {
-											for(int i=0;i<ret.size();i++)
-											{
-													out.print("<tr>");
-													for(int j=1;j<9;j++){
-														out.print("<th>");
-														out.print(ret.get(i)[j]);
-														out.print("</th>");
-													}
-													String id=ret.get(i)[1];
-													%>
-													<td><span>
-													<a href="${pageContext.request.contextPath}/FindUserServlet?userid=<%=id %>" data-toggle="tooltip" data-placement="top" title="修改"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
-													 <a href="javascript:void(0);" onclick="remove('<%=id%>')" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-close color-danger"></i></a>
-													</span></td>
-													<% 
-													out.print("</tr>");
-											}
-										}
-										session.invalidate();
-									%>
-                                       
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /# card -->
-                        
-                        
-                    </div>
-                    <!-- #/ column -->
+<%--              <iframe src="${pageContext.request.contextPath}/OptimalPathMap.jsp" width="100%" height="850" frameborder="0" scrolling="no"></iframe> --%>
+           
+           
             </div>
             <!-- #/ container -->
         </div>
         <!--**********************************
             Content body end
-        ***********************************-->      
-         <!--**********************************
+        ***********************************-->
+        
+        
+        <!--**********************************
             Footer start
         ***********************************-->
         <div class="footer">
@@ -470,15 +406,6 @@
     <script src="${pageContext.request.contextPath}/js/settings.js"></script>
     <script src="${pageContext.request.contextPath}/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/js/styleSwitcher.js"></script>
-     <script type="text/javascript">
-    function remove(userid){
-    	if(confirm("您确定删除吗？")){
-    	location.href="${pageContext.request.contextPath}/AccountDeleteServlet?userid="+userid;
-    	}else{
-    	location.href="${pageContext.request.contextPath}/AccountManageServlet";
-    	}
-    	}
-    </script>
 
 </body>
 

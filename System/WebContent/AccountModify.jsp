@@ -284,6 +284,7 @@
                         <ul aria-expanded="false">
                             <li><a href="SchemeMake.jsp">演练任务制定</a></li>
                             <li><a href="taskView.jsp">演练任务查询</a></li>
+                            <li><a href="SchemeMake_display.jsp">历史任务信息</a></li>
                         </ul>
                     </li>
                     <li>

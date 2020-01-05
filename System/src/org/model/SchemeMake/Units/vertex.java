@@ -17,6 +17,14 @@ public class vertex implements Comparable{
 		Project_id = project_id;
 	}
 	private int Project_id;
+	private int Event_id;
+	
+	public int getEvent_id() {
+		return Event_id;
+	}
+	public void setEvent_id(int event_id) {
+		Event_id = event_id;
+	}
 	public String getRoad_name() {
 		return Road_name;
 	}
@@ -136,8 +144,18 @@ public class vertex implements Comparable{
 		ans+=Integer.toString(Project_id)+")";
 		return ans;
     }
+    public String getSaverSQL1() {
+		String ans = "insert into point1 (po_id,x,y,event_id) values (";
+		ans+=Integer.toString(ID)+",";
+		ans+=this.toString()+",";
+		ans+=Integer.toString(Event_id)+")";
+		return ans;
+    }
 	public void save() {
 		Query.addSql(getSaverSQL());
+	}
+	public void save1() {
+		Query.addSql(getSaverSQL1());
 	}
 }
 

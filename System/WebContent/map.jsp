@@ -2,15 +2,10 @@
 <html>
 <head>
 <meta >
-	 <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/images/favicon.png">
-    <!-- Custom Stylesheet -->
-    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<style type="text/css">
-	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"å¾®è½¯éé»";}
+	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
 	</style>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=rvgrn6yT8jA11suotGclTuLe9Aj3AivK"></script>
 	<title>地图显示</title>
@@ -58,6 +53,7 @@
 <%@page import="org.model.SchemeMake.Units.vertex"%>
 <%@page import="org.model.SchemeMake.Units.edge"%>
 <%@page import="org.model.SchemeMake.Units.capacity"%>
+<%@page import="org.model.SchemeMake.Units.evaRoute"%>
 <%@page import="org.model.SchemeMake.PathApi.result.Route"%>
 <%@page import="org.model.Query"%>
 <%@page import="java.util.ArrayList"%>
@@ -74,11 +70,8 @@
 		Event_id   = request.getParameter("Event_id");
 		if(project_id!=null)
 		System.out.println("[get project]"+project_id);
-		if(Event_id!=null) {
-			System.out.println("获取到的eventID***********");
-			System.out.println("[get eventID]"+Event_id);
-		}
-		
+		if(Event_id!=null)
+		System.out.println("[get eventID]"+Event_id);
 		TreeSet<vertex> ts = new TreeSet<vertex>();
 		vertex origin=null;
 		boolean flg = false;
@@ -113,7 +106,7 @@
 		}
 		if(Event_id!=null){
 			ArrayList<String[]>ret = new ArrayList<String[]>();
-			String sql = "select p_id,x_coordinate,y_coordinate from point where Event_id="+Event_id;
+			String sql = "select po_id,x,y from point1 where event_id="+Event_id;
 			ret  = Query.runSql(3, sql);
 			if(ret==null||ret.size()==0){
 				System.out.println("[displayer] Wrong request : Event_ID="+Event_id);
@@ -121,11 +114,11 @@
 			else{
 				for(int i=1;i<ret.size();i++){
 					String [] tmp = ret.get(i);
-					int p_id = Integer.parseInt(tmp[1]);
+					int po_id = Integer.parseInt(tmp[1]);
 					double x = Double.parseDouble(tmp[2]);
 					double y = Double.parseDouble(tmp[3]);
 					vertex v = new vertex(x,y);
-					v.setID(p_id);
+					v.setID(po_id);
 					ts.add(v);
 					if(!flg){
 						origin = v ;
@@ -143,14 +136,15 @@
 	}
 	else{
 		out.print(((vertex)ts.iterator().next()).toString2());
-	}%>), 14);  
+	}%>), 14);  // åå§åå°å¾,è®¾ç½®ä¸­å¿ç¹åæ åå°å¾çº§å«
+	//æ·»å å°å¾ç±»åæ§ä»¶
 	map.addControl(new BMap.MapTypeControl({
 		mapTypes:[
             BMAP_NORMAL_MAP,
             BMAP_HYBRID_MAP
         ]}));	  
 	map.setCurrentCity("å¤§è¿");          // è®¾ç½®å°å¾æ¾ç¤ºçåå¸ æ­¤é¡¹æ¯å¿é¡»è®¾ç½®ç
-	map.enableScrollWheelZoom(true);     //å¼å¯é¼ æ æ»è½®ç¼©æ¾
+	map.enableScrollWheelZoom(true);    
     var plPoints = [
     	<%
 		System.out.println(project_id);
@@ -196,19 +190,19 @@
 		}
 		if(Event_id!=null){
 			ArrayList<String[]>ret = new ArrayList<String[]>();
-			String sql = "select e_id,id1,id2,capacity from  (SELECT p.e_id,c.id1,c.id2,p.event_id,capacity FROM path p,capacity c WHERE p.e_id=c.e_id) as tab where event_id="+Event_id;
+			String sql = "select evaRoute_id,Rid1,Rid2,capacity from evaRoute where event_id="+Event_id;
 			ret  = Query.runSql(4, sql);
 			if(ret==null||ret.size()==0){
 				System.out.println("[displayer] Wrong request : Event_ID="+Event_id);
 			}
 			else{
-				for(int i=0;i<ret.size();i++){
+				for(int i=1;i<ret.size();i++){
 					String [] tmp = ret.get(i);
-					int e_id = Integer.parseInt(tmp[1]);
-					int id1 = Integer.parseInt(tmp[2]);
-					int id2 = Integer.parseInt(tmp[3]);
+					int evaRoute_id = Integer.parseInt(tmp[1]);
+					int Rid1 = Integer.parseInt(tmp[2]);
+					int Rid2 = Integer.parseInt(tmp[3]);
 					int capacity = Integer.parseInt(tmp[4]);
-					capacity c = new capacity(e_id,id1,id2,capacity);
+					evaRoute r = new evaRoute(evaRoute_id,Rid1,Rid2,capacity);
 					
 					vertex src=null;
 					vertex dst=null;
@@ -216,10 +210,10 @@
 					Iterator iter = ts.iterator();
 					while(iter.hasNext()){
 						vertex v = (vertex)iter.next();
-						if(v.getID()==c.id1){
+						if(v.getID()==r.Rid1){
 							src = v;
 						}
-						else if(v.getID()==c.id2){
+						else if(v.getID()==r.Rid2){
 							dst = v;
 						}
 					}
@@ -227,15 +221,10 @@
 						continue;
 					}
 					edge e = new edge(src,dst,capacity);
-					edge [] es = e.getTrajectory();
-
-					for(int i1=0;i1<es.length;i1++){
-						out.print("{weight:"+"5"+",color:\"blue\",opacity:1,points:[");
-						out.print("\""+es[i1].getSrc().toString2()+"\",\""+es[i1].getDst().toString2()+"\"");
-						out.print("]},");
-						out.println();
-					}
-
+					out.print("{weight:"+"5"+",color:\"blue\",opacity:0.6,points:[");
+					out.print("\""+e.getSrc().toString2()+"\",\""+e.getDst().toString2()+"\"");
+					out.print("]},");
+					out.println();
 				}
 			}
 		}
@@ -243,7 +232,7 @@
     	
     	
     ];
-    //åå°å¾ä¸­æ·»å çº¿å½æ°
+    //画折线
     function addPolyline(){
         for(var i=0;i<plPoints.length;i++){
             var json = plPoints[i];
@@ -264,13 +253,21 @@
     	var locMarkers;
     	locMarkers = new BMap.Marker(value);
      
-    	map.addOverlay(locMarkers);		//å°æ æ³¨æ·»å å°å°å¾ä¸­
+    	map.addOverlay(locMarkers);		
     	
-    	locMarkers.disableMassClear();	//è®¾ç½®markerä¸å¯è¢«æ¸é¤
+    	locMarkers.disableMassClear();	
     	
     	;  
     });
     addPolyline();
+//起点终点加marker
+ var start = new BMap.Point(121.826775,39.106663);
+ var end = new BMap.Point(121.639267,38.928051);
+ var marker_sta=new BMap.Marker(start);
+ var marker_end=new BMap.Marker(end);
+ map.addOverlay(marker_sta);
+ map.addOverlay(marker_end);
+
 
 </script>
 
