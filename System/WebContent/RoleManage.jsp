@@ -78,7 +78,7 @@
                     <b class="logo-abbr"><img src="${pageContext.request.contextPath}/images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="${pageContext.request.contextPath}/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="${pageContext.request.contextPath}/images/logo-text.png" alt="">
+                        <img src="${pageContext.request.contextPath}/images/logo-new.png" alt="">
                     </span>
                 </a>
             </div>
@@ -263,7 +263,7 @@
             Header end ti-comment-alt
         ***********************************-->
 
-         <!--**********************************
+            <!--**********************************
             Sidebar start
         ***********************************-->
         <div class="nk-sidebar">           
@@ -271,22 +271,18 @@
                 <ul class="metismenu" id="menu">
                     <li class="nav-label">主页</li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a href="${pageContext.request.contextPath}/welcome.jsp" >
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">首页</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="${pageContext.request.contextPath}/welcome.jsp">Home 1</a></li>
-                            <!-- <li><a href="./index-2.html">Home 2</a></li> -->
-                        </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">演练事件管理</span>
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">演练任务管理</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="SchemeMake.jsp">演练任务制定</a></li>
                             <li><a href="taskView.jsp">演练任务查询</a></li>
-                            <li><a href="SchemeMake_display.jsp">历史任务信息</a></li>
+                            
                         </ul>
                     </li>
                     <li>
@@ -294,9 +290,8 @@
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">疏散演练</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">人群疏散方案制定</a></li>
-                            <li><a href="#">人群疏散方案查看</a></li>
-                            <li><a href="${pageContext.request.contextPath}/email-compose.html">Compose</a></li>
+                            <li><a href="SchemeMake_display.jsp">疏散演练进度</a></li>
+                            <li><a href="${pageContext.request.contextPath}/SchemeMake_display.jsp">获取人群疏散方案</a></li>
                         </ul>
                     </li>
                     <li>
@@ -304,19 +299,20 @@
                             <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">保护演练</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">人群保护方案制定</a></li>
-                            <li><a href="#">人群保护方案查看</a></li>
+                            <li><a href="SchemeMake_display.jsp">保护演练进度</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ProtectionMake.jsp">获取人群保护方案</a></li>
+                            
                         </ul>
                     </li>
                     <li>
-                       <a  href="Evaluator.jsp" >
-                            <i class="icon-graph menu-icon">&nbsp;<span class="nav-text">演练评估</span></i>
-                       </a>
+                    <a  href="Evaluator.jsp" >
+                            <i class="icon-graph menu-icon"></i><span class="nav-text">演练评估</span>
+                        </a>
                     </li>
                     
                     <li>
                        <a  href="Querier.jsp" >
-                            <i class="icon-grid menu-icon">&nbsp;<span class="nav-text">演练事件查询</span></i>
+                            <i class="icon-grid menu-icon"></i>&nbsp;<span class="nav-text">演练事件查询</span>
                        </a>
                     </li>
                     <li>
@@ -344,7 +340,6 @@
         <!--**********************************
             Sidebar end
         ***********************************-->
-
         <!--**********************************
             Content body start
         ***********************************-->
@@ -380,6 +375,7 @@
                                                 <th>角色名称</th>
                                                 <th>角色状态</th>
                                                 <th>权限码</th>
+                                                <th>操作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -398,12 +394,18 @@
 													out.print(ret.get(i)[j]);
 													out.print("</th>");
 												}
+												String id=ret.get(i)[1];
 												if((Integer.parseInt(power)&8)==8){
 													String k = toBinary(Integer.parseInt(ret.get(i)[9]),11);
 													out.print("<th>");
 													out.print(k);
 													out.print("</th>");
-												}
+												}%>
+												<td><span>
+													<a href="${pageContext.request.contextPath}/FindUserServlet?userid=<%=id %>" data-toggle="tooltip" data-placement="top" title="修改"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
+													 <a href="javascript:void(0);" onclick="remove('<%=id%>')" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-close color-danger"></i></a>
+													</span></td>
+												<% 
 												out.print("</tr>");
 											}
 										}
@@ -484,7 +486,7 @@
                                             </div>
                                         </div>
                                     
-                                    <div class="card">
+                                   <!--  <div class="card">
                                         <div class="card-header">
                                             <h5 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa" aria-hidden="true"></i> 删除角色</h5>
                                         </div>
@@ -552,13 +554,13 @@
                                        </form>
                                         </div>
                                     </div>
-                                    </div>
+                                    </div> -->
                                     
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><i class="fa" aria-hidden="true"></i> 启用/停用角色</h5>
+                                            <h5 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa" aria-hidden="true"></i> 启用/停用角色</h5>
                                         </div>
-                                        <div id="collapseThree" class="collapse" data-parent="#accordion-one">
+                                        <div id="collapseTwo" class="collapse" data-parent="#accordion-one">
                                             <div class="card-body">
                                             
                                             <form action="RoleEnableServlet" method="post">
@@ -605,19 +607,19 @@
                                         <label>选择权限：</label>
                                             <div class="form-check form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" name='power1' value='2'>可修改角色信息</label>
+                                                    <input type="checkbox" class="form-check-input" name='power1' value='2'>可查看演练任务</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" name='power2' value='4'>可修改账户信息</label>
+                                                    <input type="checkbox" class="form-check-input" name='power2' value='4'>可新建演练任务</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" name='power3' value='8' >可修改角色权限</label>
+                                                    <input type="checkbox" class="form-check-input" name='power3' value='8' >可审核演练任务</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" name='power4' value='32'>可修改方案信息</label>
+                                                    <input type="checkbox" class="form-check-input" name='power4' value='32'>可管理账户和角色</label>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-dark">确定</button>
@@ -667,6 +669,15 @@
     <script src="${pageContext.request.contextPath}/js/settings.js"></script>
     <script src="${pageContext.request.contextPath}/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/js/styleSwitcher.js"></script>
+     <script type="text/javascript">
+    function remove(userid){
+    	if(confirm("您确定删除吗？")){
+    	location.href="${pageContext.request.contextPath}/AccountDeleteServlet?userid="+userid;
+    	}else{
+    	location.href="${pageContext.request.contextPath}/AccountManageServlet";
+    	}
+    	}
+    </script>
 
 </body>
 

@@ -85,10 +85,10 @@
         <div class="nav-header">
             <div class="brand-logo">
                 <a href="index.html">
-                    <b class="logo-abbr"><img src="${pageContext.request.contextPath}/images/logo.png" alt=""> </b>
+                   <b class="logo-abbr"><img src="${pageContext.request.contextPath}/images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="${pageContext.request.contextPath}/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="${pageContext.request.contextPath}/images/logo-text.png" alt="">
+                      <img src="${pageContext.request.contextPath}/images/logo-new.png" alt="">
                     </span>
                 </a>
             </div>
@@ -285,22 +285,18 @@
                 <ul class="metismenu" id="menu">
                     <li class="nav-label">主页</li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a href="${pageContext.request.contextPath}/welcome.jsp" >
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">首页</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="${pageContext.request.contextPath}/welcome.jsp">Home 1</a></li>
-                            <!-- <li><a href="./index-2.html">Home 2</a></li> -->
-                        </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">演练事件管理</span>
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">演练任务管理</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="SchemeMake.jsp">演练任务制定</a></li>
                             <li><a href="taskView.jsp">演练任务查询</a></li>
-                            <li><a href="SchemeMake_display.jsp">历史任务信息</a></li>
+                            
                         </ul>
                     </li>
                     <li>
@@ -308,8 +304,8 @@
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">疏散演练</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="${pageContext.request.contextPath}/SchemeMake_display.jsp">人群疏散方案制定</a></li>
-                            <li><a href="#">人群疏散方案查看</a></li>
+                            <li><a href="SchemeMake_display.jsp">疏散演练进度</a></li>
+                            <li><a href="${pageContext.request.contextPath}/SchemeMake_display.jsp">获取人群疏散方案</a></li>
                         </ul>
                     </li>
                     <li>
@@ -317,22 +313,23 @@
                             <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">保护演练</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="${pageContext.request.contextPath}/ProtectionMake.jsp">人群保护方案制定</a></li>
-                            <li><a href="#">人群保护方案查看</a></li>
+                            <li><a href="SchemeMake_display.jsp">保护演练进度</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ProtectionMake.jsp">获取人群保护方案</a></li>
+                            
                         </ul>
                     </li>
                     <li>
-                       <a  href="Evaluator.jsp" >
-                            <i class="icon-graph menu-icon">&nbsp;<span class="nav-text">演练评估</span></i>
-                       </a>
+                    <a  href="Evaluator.jsp" >
+                            <i class="icon-graph menu-icon"></i><span class="nav-text">演练评估</span>
+                        </a>
                     </li>
                     
                     <li>
                        <a  href="Querier.jsp" >
-                            <i class="icon-grid menu-icon">&nbsp;<span class="nav-text">演练事件查询</span></i>
+                            <i class="icon-grid menu-icon"></i>&nbsp;<span class="nav-text">演练事件查询</span>
                        </a>
                     </li>
-                    <li>
+                    <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-note menu-icon"></i><span class="nav-text">系统管理</span>
                         </a>
@@ -368,12 +365,12 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="card gradient-1">
                             <div class="card-body">
-                                <h3 class="card-title text-white">演练事件</h3>
+                                <h3 class="card-title text-white">演练任务</h3>
                                 <div class="d-inline-block">
-                                    <h2 class="text-white">4565</h2>
-                                    <p class="text-white mb-0">Jan - March 2019</p>
+                                    <h2 class="text-white">25</h2>
+                                    <p class="text-white mb-0">2019年6月-12月</p>
                                 </div>
-                                <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-tasks"></i></span>
                             </div>
                         </div>
                     </div>
@@ -382,10 +379,10 @@
                             <div class="card-body">
                                 <h3 class="card-title text-white">疏散方案</h3>
                                 <div class="d-inline-block">
-                                    <h2 class="text-white">$ 8541</h2>
-                                    <p class="text-white mb-0">Jan - March 2019</p>
+                                    <h2 class="text-white">25</h2>
+                                    <p class="text-white mb-0">2019年6月-12月</p>
                                 </div>
-                                <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
                             </div>
                         </div>
                     </div>
@@ -394,10 +391,10 @@
                             <div class="card-body">
                                 <h3 class="card-title text-white">保护方案</h3>
                                 <div class="d-inline-block">
-                                    <h2 class="text-white">4565</h2>
-                                    <p class="text-white mb-0">Jan - March 2019</p>
+                                    <h2 class="text-white">20</h2>
+                                    <p class="text-white mb-0">2019年6月-12月</p>
                                 </div>
-                                <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
+                                <span class="float-right display-5 opacity-5"><i class="fa fa-user"></i></span>
                             </div>
                         </div>
                     </div>
@@ -407,7 +404,7 @@
                                 <h3 class="card-title text-white">演练评估</h3>
                                 <div class="d-inline-block">
                                     <h2 class="text-white">99%</h2>
-                                    <p class="text-white mb-0">Jan - March 2019</p>
+                                    <p class="text-white mb-0">2019年6月-12月</p>
                                 </div>
                                 <span class="float-right display-5 opacity-5"><i class="fa fa-heart"></i></span>
                             </div>
@@ -423,10 +420,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-4 mt-5">
-                                        <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-primary btn-block"><i class="ti-plus f-s-12 m-r-5"></i>新增事件</a>
+                                        <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-primary btn-block"><i class="ti-plus f-s-12 m-r-5"></i>新增任务</a>
                                         <div id="external-events" class="m-t-20">
                                             <p>点击此按钮或点击日历</p>
-                                            <div class="external-event bg-primary text-white" data-class="bg-primary"><i class="fa fa-move"></i>发布新事件</div>    
+                                            <div class="external-event bg-primary text-white" data-class="bg-primary"><i class="fa fa-move"></i>添加新活动</div>    
                                             <div class="external-event bg-warning text-white" data-class="bg-warning"><i class="fa fa-move"></i>我的活动</div>
                                             
                                         </div>
@@ -448,12 +445,12 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title"><strong>新增事件</strong></h4>
+                                                    <h4 class="modal-title"><strong>新增任务</strong></h4>
                                                 </div>
                                                 <div class="modal-body"></div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">取消</button>
-                                                    <button type="button" class="btn btn-success save-event waves-effect waves-light">创建新事件</button>
+                                                    <button type="button" class="btn btn-success save-event waves-effect waves-light">创建新任务</button>
                                                     <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">删除</button>
                                                 </div>
                                             </div>
@@ -515,7 +512,7 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">wzj</a> 2019</p>
             </div>
         </div>
         <!--**********************************

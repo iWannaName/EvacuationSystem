@@ -86,7 +86,7 @@
                     <b class="logo-abbr"><img src="${pageContext.request.contextPath}/images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="${pageContext.request.contextPath}/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="${pageContext.request.contextPath}/images/logo-text.png" alt="">
+                        <img src="${pageContext.request.contextPath}/images/logo-new.png" alt="">
                     </span>
                 </a>
             </div>
@@ -278,22 +278,18 @@
                 <ul class="metismenu" id="menu">
                     <li class="nav-label">主页</li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a href="${pageContext.request.contextPath}/welcome.jsp" >
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">首页</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="${pageContext.request.contextPath}/welcome.jsp">Home 1</a></li>
-                            <!-- <li><a href="./index-2.html">Home 2</a></li> -->
-                        </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">演练事件管理</span>
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">演练任务管理</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="SchemeMake.jsp">演练任务制定</a></li>
                             <li><a href="taskView.jsp">演练任务查询</a></li>
-                            <li><a href="SchemeMake_display.jsp">历史任务信息</a></li>
+                            
                         </ul>
                     </li>
                     <li>
@@ -301,9 +297,8 @@
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">疏散演练</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">人群疏散方案制定</a></li>
-                            <li><a href="#">人群疏散方案查看</a></li>
-                            <li><a href="${pageContext.request.contextPath}/email-compose.html">Compose</a></li>
+                            <li><a href="SchemeMake_display.jsp">疏散演练进度</a></li>
+                            <li><a href="${pageContext.request.contextPath}/SchemeMake_display.jsp">获取人群疏散方案</a></li>
                         </ul>
                     </li>
                     <li>
@@ -311,19 +306,20 @@
                             <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">保护演练</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">人群保护方案制定</a></li>
-                            <li><a href="#">人群保护方案查看</a></li>
+                            <li><a href="SchemeMake_display.jsp">保护演练进度</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ProtectionMake.jsp">获取人群保护方案</a></li>
+                            
                         </ul>
                     </li>
                     <li>
-                       <a  href="Evaluator.jsp" >
-                            <i class="icon-graph menu-icon">&nbsp;<span class="nav-text">演练评估</span></i>
-                       </a>
+                    <a  href="Evaluator.jsp" >
+                            <i class="icon-graph menu-icon"></i><span class="nav-text">演练评估</span>
+                        </a>
                     </li>
                     
                     <li>
                        <a  href="Querier.jsp" >
-                            <i class="icon-grid menu-icon">&nbsp;<span class="nav-text">演练事件查询</span></i>
+                            <i class="icon-grid menu-icon"></i>&nbsp;<span class="nav-text">演练事件查询</span>
                        </a>
                     </li>
                     <li>
@@ -351,6 +347,7 @@
         <!--**********************************
             Sidebar end
         ***********************************-->
+        
          <!--**********************************
             Content body start
         ***********************************-->
@@ -455,11 +452,11 @@
                                     <form action="Querier.jsp" method="GET">
                                         <div class="form-row align-items-center">
                                             <div class="col-auto">
-                                                <label class="sr-only">事件id</label>
+                                                <label class="sr-only">任务id</label>
                                                 <input type="text" class="form-control mb-2" name="EventID" placeholder="事件id">
                                             </div>
                                             <div class="col-auto">
-                                                <label class="sr-only">事件名称</label>
+                                                <label class="sr-only">任务名称</label>
                                                 <input type="text" class="form-control mb-2" name="EventName" placeholder="事件名称">
                                             </div>
                                             <div class="col-auto">
@@ -480,9 +477,9 @@
                                     <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
                                             <tr>
-                                                 <th>事件ID</th>
-                                                <th>事件名称</th>
-                                                <th>事件类型</th>
+                                                 <th>任务ID</th>
+                                                <th>任务名称</th>
+                                                <th>任务类型</th>
                                                 <th>疏散点</th>
                                                 <th>避难点</th>
                                                 <th>录入人</th>
@@ -497,7 +494,7 @@
 											    
 											%>
 											 <tr>
-                                                <th><%=line[1]%></th>
+                                                <th><a href="displayer.jsp?Project_id=<%=line[1]%>"><%=line[1]%></a></a></th>
                                                 <td><%=line[2]%></td>
                                                 <td><%=line[3]%></td>
                                                 <td><%=line[4]%></td>

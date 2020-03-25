@@ -82,7 +82,7 @@
                     <b class="logo-abbr"><img src="${pageContext.request.contextPath}/images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="${pageContext.request.contextPath}/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="${pageContext.request.contextPath}/images/logo-text.png" alt="">
+                        <img src="${pageContext.request.contextPath}/images/logo-new.png" alt="">
                     </span>
                 </a>
             </div>
@@ -267,7 +267,7 @@
             Header end ti-comment-alt
         ***********************************-->
 
-         <!--**********************************
+        <!--**********************************
             Sidebar start
         ***********************************-->
         <div class="nk-sidebar">           
@@ -275,54 +275,51 @@
                 <ul class="metismenu" id="menu">
                     <li class="nav-label">主页</li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a href="${pageContext.request.contextPath}/welcome.jsp" >
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">首页</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="${pageContext.request.contextPath}/index.jsp">Home 1</a></li>
-                            <!-- <li><a href="./index-2.html">Home 2</a></li> -->
-                        </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">演练事件管理</span>
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">演练任务管理</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="SchemeMake.jsp">演练任务制定</a></li>
                             <li><a href="taskView.jsp">演练任务查询</a></li>
+                            
                         </ul>
-                    </li>
+                    </li class="mega-menu mega-menu-sm">
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">疏散演练</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">人群疏散方案制定</a></li>
-                            <li><a href="#">人群疏散方案查看</a></li>
-                            <li><a href="${pageContext.request.contextPath}/email-compose.html">Compose</a></li>
+                            <li><a href="SchemeMake_display.jsp">疏散演练进度</a></li>
+                            <li><a href="${pageContext.request.contextPath}/SchemeMake_display.jsp">获取人群疏散方案</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">保护演练</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">人群保护方案制定</a></li>
-                            <li><a href="#">人群保护方案查看</a></li>
+                            <li><a href="SchemeMake_display.jsp">保护演练进度</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ProtectionMake.jsp">获取人群保护方案</a></li>
+                            
                         </ul>
                     </li>
                     <li>
-                       <a  href="Evaluator.jsp" >
-                            <i class="icon-graph menu-icon">&nbsp;<span class="nav-text">演练评估</span></i>
-                       </a>
+                    <a  href="Evaluator.jsp" >
+                            <i class="icon-graph menu-icon"></i><span class="nav-text">演练评估</span>
+                        </a>
                     </li>
                     
                     <li>
                        <a  href="Querier.jsp" >
-                            <i class="icon-grid menu-icon">&nbsp;<span class="nav-text">演练事件查询</span></i>
+                            <i class="icon-grid menu-icon"></i>&nbsp;<span class="nav-text">演练事件查询</span>
                        </a>
                     </li>
-                    <li>
+                    <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-note menu-icon"></i><span class="nav-text">系统管理</span>
                         </a>
@@ -378,7 +375,7 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">wzj</a> 2019</p>
             </div>
         </div>
         <!--**********************************

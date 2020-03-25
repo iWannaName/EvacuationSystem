@@ -87,7 +87,7 @@
                     <b class="logo-abbr"><img src="${pageContext.request.contextPath}/images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="${pageContext.request.contextPath}/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="${pageContext.request.contextPath}/images/logo-text.png" alt="">
+                        <img src="${pageContext.request.contextPath}/images/logo-new.png" alt="">
                     </span>
                 </a>
             </div>
@@ -271,8 +271,7 @@
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
-
-         <!--**********************************
+ <!--**********************************
             Sidebar start
         ***********************************-->
         <div class="nk-sidebar">           
@@ -284,18 +283,17 @@
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">首页</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="${pageContext.request.contextPath}/welcome.jsp">Home 1</a></li>
+                            <li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">演练事件管理</span>
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">演练任务管理</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="SchemeMake.jsp">演练任务制定</a></li>
                             <li><a href="taskView.jsp">演练任务查询</a></li>
-                            <li><a href="SchemeMake_display.jsp">历史任务信息</a></li>
                         </ul>
                     </li>
                     <li>
@@ -305,7 +303,6 @@
                         <ul aria-expanded="false">
                             <li><a href="#">人群疏散方案制定</a></li>
                             <li><a href="#">人群疏散方案查看</a></li>
-                            <li><a href="${pageContext.request.contextPath}/email-compose.html">Compose</a></li>
                         </ul>
                     </li>
                     <li>

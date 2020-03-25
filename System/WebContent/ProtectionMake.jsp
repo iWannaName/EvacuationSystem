@@ -5,23 +5,58 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <title>保护方案</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/images/favicon.png">
     <!-- Custom Stylesheet -->
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+    
     <style type="text/css">
-	#allmap {width: 100%;height: 800px;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	#allmap {width: 600px;height: 800px;overflow: hidden;margin:0;font-family:"微软雅黑";}
 	</style>
-	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=18KFfk5BGw6gHtfuvV8pSg08wgc65xFc"></script>
+
+	<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=18KFfk5BGw6gHtfuvV8pSg08wgc65xFc"></script>
     <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 
 </head>
 
 <body>
+ <!--*******************
+        权限控制
+    ********************-->
+ <%
+	String username = null;
+	Cookie[] cookies = request.getCookies();
+	for (Cookie cookie : cookies) {
+		if (cookie.getName().equals("username")) {
+			username = cookie.getValue();
+		}
+	}
+	if(username==null){
+		out.println("<script>alert('没有权限 ')</script>");
+		return;
+	}
+	%>
+		<%!
+			String power;
+			String status;
+			String subtitle;
+		%>
+		<%
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("power")) {
+					power = cookie.getValue();
+				}
+				if (cookie.getName().equals("status")) {
+					status = cookie.getValue();
+				}
+			}
+		%>
+ <!--*******************
+       权限控制结束
+    ********************-->
   <!--*******************
         Preloader start
     ********************-->
@@ -51,7 +86,7 @@
                     <b class="logo-abbr"><img src="${pageContext.request.contextPath}/images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="${pageContext.request.contextPath}/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="${pageContext.request.contextPath}/images/logo-text.png" alt="">
+                        <img src="${pageContext.request.contextPath}/images/logo-new.png" alt="">
                     </span>
                 </a>
             </div>
@@ -236,7 +271,7 @@
             Header end ti-comment-alt
         ***********************************-->
 
-         <!--**********************************
+      <!--**********************************
             Sidebar start
         ***********************************-->
         <div class="nk-sidebar">           
@@ -244,21 +279,18 @@
                 <ul class="metismenu" id="menu">
                     <li class="nav-label">主页</li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a href="${pageContext.request.contextPath}/welcome.jsp" >
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">首页</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="${pageContext.request.contextPath}/index.jsp">Home 1</a></li>
-                            <!-- <li><a href="./index-2.html">Home 2</a></li> -->
-                        </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">演练事件管理</span>
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">演练任务管理</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="SchemeMake.jsp">演练任务制定</a></li>
                             <li><a href="taskView.jsp">演练任务查询</a></li>
+                            
                         </ul>
                     </li>
                     <li>
@@ -266,9 +298,8 @@
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">疏散演练</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">人群疏散方案制定</a></li>
-                            <li><a href="#">人群疏散方案查看</a></li>
-                            <li><a href="${pageContext.request.contextPath}/email-compose.html">Compose</a></li>
+                            <li><a href="SchemeMake_display.jsp">疏散演练进度</a></li>
+                            <li><a href="${pageContext.request.contextPath}/SchemeMake_display.jsp">获取人群疏散方案</a></li>
                         </ul>
                     </li>
                     <li>
@@ -276,28 +307,39 @@
                             <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">保护演练</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">人群保护方案制定</a></li>
-                            <li><a href="#">人群保护方案查看</a></li>
+                            <li><a href="SchemeMake_display.jsp">保护演练进度</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ProtectionMake.jsp">获取人群保护方案</a></li>
+                            
                         </ul>
                     </li>
                     <li>
-                       <a  href="Evaluator.jsp" >
-                            <i class="icon-graph menu-icon">&nbsp;<span class="nav-text">演练评估</span></i>
-                       </a>
+                    <a  href="Evaluator.jsp" >
+                            <i class="icon-graph menu-icon"></i><span class="nav-text">演练评估</span>
+                        </a>
                     </li>
                     
                     <li>
                        <a  href="Querier.jsp" >
-                            <i class="icon-grid menu-icon">&nbsp;<span class="nav-text">演练事件查询</span></i>
+                            <i class="icon-grid menu-icon"></i>&nbsp;<span class="nav-text">演练事件查询</span>
                        </a>
                     </li>
-                    <li>
+                    <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-note menu-icon"></i><span class="nav-text">系统管理</span>
                         </a>
                         <ul aria-expanded="false">
-                         <li><a href="${pageContext.request.contextPath}/AccountManage.jsp">账户管理</a></li>
-                            <li><a href="${pageContext.request.contextPath}/RoleManage.jsp">人群保护方案查看</a></li>
+                         <%
+                            	if((Integer.parseInt(power)&4)==4){
+                            		subtitle="可修改账户信息";
+                            		out.print("<li><a class='active-menu' href='AccountManageServlet'>账户管理</a></li>");
+                            	}
+                            %>
+                            <%
+                            	if((Integer.parseInt(power)&2)==2 && status.equals("1")){
+                            		subtitle="可修改角色信息";
+                            		out.print("<li><a href='RoleManageServlet'>角色管理</a></li>");
+                            	}
+                            %>
                         </ul>
                     </li>
                 </ul>
@@ -336,28 +378,24 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">保护方案</h4>
-                                <div class="button-group">
-                                    <div class="btn-group-vertical" id="driving_way">
-                                    <div class="input-group mb-3">
-                                     <div class="input-group-prepend">
-                                        <button class="btn btn-primary"  id="0">路径1</button>
-                                        </div>
-                                       <input type="text" class="form-control" value="派遣警察5人">
-                                        </div>
-                                        <div class="input-group mb-3">
-                                     <div class="input-group-prepend">
-                                        <button class="btn btn-primary"  id="1">路径2</button>
-                                        </div>
-                                        <input type="text" class="form-control" value="派遣警察3人">
-                                        </div>
-                                        <div class="input-group mb-3">
-                                     <div class="input-group-prepend">
-                                        <button class="btn btn-primary"  id="2">路径3</button>
-                                        </div>
-                                         <input type="text" class="form-control" value="派遣警察2人">
-                                        </div>
-                                    </div>
-                                </div>
+                                <p>恐怖分子人数：5人 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;出警人数：20人 </p>
+                               
+                               <button type="button" class="btn btn-primary">路径1</button>
+                                
+                                <p>
+                                <h5> 保护概率：0.80288</h5><br>
+                                <h5>派遣警察人数:10人</h5>
+                                </p>
+                                <button type="button" class="btn btn-primary">路径2</button>
+                                <p>
+                                <h5>保护概率：0.50291</h5><br>
+                                <h5> 派遣警察人数:6人</h5>
+                                </p>
+                                <button type="button" class="btn btn-primary">路径3</button>
+                                <p>
+                                <h5> 保护概率：0.30241</h5><br>
+                                <h5>派遣警察人数:4人</h5>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -395,31 +433,15 @@
     <script src="${pageContext.request.contextPath}/js/settings.js"></script>
     <script src="${pageContext.request.contextPath}/js/gleek.js"></script>
     <script src="${pageContext.request.contextPath}/js/styleSwitcher.js"></script>
-
+   
 </body>
 
 </html>
 <script type="text/javascript">
 	// 百度地图API功能
 	var map = new BMap.Map("allmap");
-	var start = "大连大学";
-	var end = "大连火车站";
 	map.centerAndZoom(new BMap.Point(121.62,38.92), 11);
-	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-	//三种驾车策略：最少时间，最短距离，避开高速
-	let routePolicy = [BMAP_DRIVING_POLICY_LEAST_TIME,BMAP_DRIVING_POLICY_LEAST_DISTANCE,BMAP_DRIVING_POLICY_AVOID_HIGHWAYS];
-	window.onload = function(){
-		let arr = document.getElementsByTagName('button');
-		for(let i = 0;i<arr.length;i++){
-			
-		arr[i].onclick = function(){
-			map.clearOverlays(); 
-			search(start,end,routePolicy[i]); 
-			function search(start,end,route){ 
-				let driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true,enableDragging : true },policy: route});
-				driving.search(start,end);
-			}
-		}
-		}
-		}
+	var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+	driving.search("大连站", "大连大学");
+	map.enableScrollWheelZoom(true);
 </script>

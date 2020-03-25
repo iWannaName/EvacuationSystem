@@ -96,7 +96,7 @@
                     <b class="logo-abbr"><img src="${pageContext.request.contextPath}/images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="${pageContext.request.contextPath}/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="${pageContext.request.contextPath}/images/logo-text.png" alt="">
+                        <img src="${pageContext.request.contextPath}/images/logo-new.png" alt="">
                     </span>
                 </a>
             </div>
@@ -289,21 +289,18 @@
                 <ul class="metismenu" id="menu">
                     <li class="nav-label">主页</li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a href="${pageContext.request.contextPath}/welcome.jsp" >
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">首页</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="${pageContext.request.contextPath}/index.jsp">Home 1</a></li>
-                            <!-- <li><a href="./index-2.html">Home 2</a></li> -->
-                        </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">演练事件管理</span>
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">演练任务管理</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="SchemeMake.jsp">演练任务制定</a></li>
                             <li><a href="taskView.jsp">演练任务查询</a></li>
+                            
                         </ul>
                     </li>
                     <li>
@@ -311,9 +308,8 @@
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">疏散演练</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">人群疏散方案制定</a></li>
-                            <li><a href="#">人群疏散方案查看</a></li>
-                            <li><a href="${pageContext.request.contextPath}/email-compose.html">Compose</a></li>
+                            <li><a href="SchemeMake_display.jsp">疏散演练进度</a></li>
+                            <li><a href="${pageContext.request.contextPath}/SchemeMake_display.jsp">获取人群疏散方案</a></li>
                         </ul>
                     </li>
                     <li>
@@ -321,19 +317,20 @@
                             <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">保护演练</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">人群保护方案制定</a></li>
-                            <li><a href="#">人群保护方案查看</a></li>
+                            <li><a href="SchemeMake_display.jsp">保护演练进度</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ProtectionMake.jsp">获取人群保护方案</a></li>
+                            
                         </ul>
                     </li>
                     <li>
-                       <a  href="Evaluator.jsp" >
-                            <i class="icon-graph menu-icon">&nbsp;<span class="nav-text">演练评估</span></i>
-                       </a>
+                    <a  href="Evaluator.jsp" >
+                            <i class="icon-graph menu-icon"></i><span class="nav-text">演练评估</span>
+                        </a>
                     </li>
                     
                     <li>
                        <a  href="Querier.jsp" >
-                            <i class="icon-grid menu-icon">&nbsp;<span class="nav-text">演练事件查询</span></i>
+                            <i class="icon-grid menu-icon"></i>&nbsp;<span class="nav-text">演练事件查询</span>
                        </a>
                     </li>
                     <li>
@@ -397,6 +394,10 @@
   <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">疏散方案</h4>
+                                <div>
+                                <p>待疏散总人数：1000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;预计疏散时间：9小时</p>
+                               
+                                </div>
                                 <!-- Nav tabs -->
                                 <div class="default-tab">
                                     <ul class="nav nav-tabs mb-3" role="tablist">
@@ -406,33 +407,35 @@
                                         </li>
                                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#third">路径3</a>
                                         </li>
-                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#forth">路径4</a>
-                                        </li>
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane fade show active" id="first" role="tabpanel">
                                         <h5>疏散人数</h5>
-                                        <p>121人</p>
+                                        <p>630人</p>
                                          <p></p>
+                                         
+                                        <h5>疏散时间</h5>
+                                        <p>8小时10分</p>
+                                        <p></p>
+                                        
                                              <form>
                                             <h5>疏散路径</h5>
-                                            <select class="form-control" id="sel1">
-                                                <option>途径振兴路，东联路，全城39.8公里</option>
-                                                <option>1.进入学府大街，行驶2.2公里</option>
-                                                <option>2.进入学府南街，行驶530米</option>
-                                                <option>3.进入松翠路，行驶390米</option>
-                                                <option>4.进入松仁街，行驶260米</option>
-                                                <option>5.进入铁山中路，行驶300米</option>
-                                                <option>6.进入铁山西路，行驶1.3米</option>
-                                                <option>7.进入东北六街，行驶320米</option>
-                                                <option>8.进入淮河西路，行驶4.4公里</option>
-                                                <option>9.进入赫山西路，行驶1.3公里</option>
-                                                <option>10.进入振兴路路，行驶9.8公里</option>
-                                                
-                                            </select>
+                                            <p></p>
+                                          <h5>途径振兴路，东联路，全程39.8公里</h5>
+                                          <p>
+                                                1.进入学府大街，行驶2.2公里<br>
+                                                2.进入学府南街，行驶530米<br>
+                                                3.进入松翠路，行驶390米<br>
+                                                4.进入松仁街，行驶260米<br>
+                                                5.进入铁山中路，行驶300米<br>
+                                                6.进入铁山西路，行驶1.3米<br>
+                                                7.进入东北六街，行驶320米<br>
+                                                8.进入淮河西路，行驶4.4公里<br>
+                                                9.进入赫山西路，行驶1.3公里<br>
+                                                10.进入振兴路路，行驶9.8公里
+                                            </p>    
+                                            
                                         </form>
-                                       
-                                        
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="second">

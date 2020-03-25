@@ -1,29 +1,27 @@
 <!DOCTYPE html>
-<html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<title>步行路线规划</title>
+<script type="text/javascript" src="//api.map.baidu.com/api?v=3.0&ak=18KFfk5BGw6gHtfuvV8pSg08wgc65xFc"></script>
+<style type="text/css">
+body, html,#container {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+</style>
 </head>
 <body>
-
-
-<button id="b1">b1</button>
-<button id="b2">b2</button>
-<button id="b3">b3</button>
-
-
+<div id="container"></div>
+<script type="text/javascript">
+var map = new BMap.Map("container"); 
+map.centerAndZoom(new BMap.Point(116.404, 39.915), 14); 
+var walking = new BMap.WalkingRoute(map, { 
+    renderOptions: { 
+        map: map, 
+        autoViewport: true 
+    }
+});
+var start = new BMap.Point(116.310791, 40.003419);
+var end = new BMap.Point(116.326419, 40.003519);
+walking.search(start, end);
+</script>
 </body>
 </html>
-<script type="text/javascript">
-let routePolicy = [110,120,130];
-window.onload = function(){
-
-	let arr = document.getElementsByTagName('button');
-	for(let i = 0;i<arr.length;i++){
-	arr[i].onclick = function(){
-	
-	alert(routePolicy[i]);
-	}
-	}
-	}
-</script>
